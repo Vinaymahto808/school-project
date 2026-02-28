@@ -16,10 +16,10 @@ import admin1 from "@/assets/admin1.jpg";
 import admin2 from "@/assets/admin2.jpg";
 
 const stats = [
-  { icon: Users, value: "2,500+", label: "Happy Students" },
-  { icon: GraduationCap, value: "150+", label: "Caring Teachers" },
-  { icon: Award, value: "20+", label: "Years of Joy" },
-  { icon: Briefcase, value: "100%", label: "Fun Learning" },
+  { icon: Users, value: "500+", label: "Happy Students" },
+  { icon: GraduationCap, value: "50+", label: "Caring Teachers" },
+  { icon: Award, value: "5+", label: "Years of Joy" },
+  { icon: Briefcase, value: "100%", label: "Supportive Staff" },
 ];
 
 const quickLinks = [
@@ -97,10 +97,10 @@ const Index = () => {
           className="max-w-3xl"
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-secondary text-sm font-medium mb-6">
-            🎓 Admissions Open 2025-26
+            🎓 Hurry up seats are available!
           </span>
           <h1 className="font-heading font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight">
-            Welcome to <span className="gradient-text">Gyan Jyoti</span>
+            Gyan Jyoti <span className="gradient-text">International School</span>
           </h1>
           <p className="text-white/70 text-lg md:text-xl mb-10 max-w-2xl">
             Where every child shines bright! We nurture young minds with love, creativity, and joyful learning to build a wonderful future.
@@ -114,7 +114,7 @@ const Index = () => {
     </section>
 
     {/* Stats bar */}
-    <section className="relative z-20 -mt-16 px-4 md:px-8">
+    <section className="relative z-10 -mt-16 px-4 md:px-8">
       <div className="container-custom">
         <div className="glass-card rounded-2xl p-6 md:p-8 grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((s, i) => (
@@ -141,7 +141,7 @@ const Index = () => {
     <section className="section-padding">
       <div className="container-custom">
         <AnimatedSection className="text-center mb-12">
-          <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground mb-3">Life at Gyan Jyoti 📸</h2>
+          <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground mb-3">Life at Gyan Jyoti International School 📸</h2>
           <p className="text-muted-foreground max-w-xl mx-auto">See how our students learn, play, and grow every day!</p>
         </AnimatedSection>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -217,8 +217,8 @@ const Index = () => {
       </div>
       <div className="container-custom relative z-10">
         <AnimatedSection>
-          <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-4">Ready to Join the Gyan Jyoti Family? 🌈</h2>
-          <p className="text-white/70 text-lg mb-8 max-w-xl mx-auto">Give your child the gift of joyful learning and a bright future!</p>
+          <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-4">Ready to Join the Gyan Jyoti International School Family? </h2>
+          <p className="text-white/70 text-lg mb-8 max-w-xl mx-auto">hurry up for   bright future!</p>
           <Link to="/contact" className="btn-gold-pill text-base inline-block">Enroll Now ✨</Link>
         </AnimatedSection>
       </div>
