@@ -223,7 +223,7 @@ const Index = () => {
 
               <ul className="space-y-2 mb-7">
                 {[
-                  "CBSE affiliated from Nursery to Class XII",
+                  "CBSE affiliated from Nursery to Class X",
                   "Experienced and caring teachers",
                   "Safe, clean and green school campus",
                   "Focus on studies, sports and good values",
