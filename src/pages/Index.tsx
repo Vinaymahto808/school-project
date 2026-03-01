@@ -175,7 +175,7 @@ const Index = () => {
         <div className="container-custom max-w-5xl mx-auto">
 
           <AnimatedSection>
-            <p className="text-blue-700 text-xs font-bold uppercase tracking-widest mb-1">About Our School</p>
+            <p className="text-blue-700 text-xs font-bold uppercase tracking-widest mb-1">School</p>
             <h2 className="text-2xl md:text-3xl font-extrabold text-gray-800 border-b-2 border-blue-700 pb-3 mb-8">
               A Place Where Every Child Feels at Home
             </h2>
