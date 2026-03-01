@@ -1,6 +1,5 @@
 import { useState, useMemo } from "react";
 import Layout from "@/components/Layout";
-import HeroSection from "@/components/HeroSection";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Search, Download, AlertTriangle, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -31,11 +30,11 @@ const categories: Category[] = ["All", "Exam", "Admission", "Holiday", "Circular
 const PER_PAGE = 5;
 
 const categoryColors: Record<string, string> = {
-  Exam: "bg-blue-100 text-blue-700",
+  Exam:      "bg-blue-100 text-blue-700",
   Admission: "bg-emerald-100 text-emerald-700",
-  Holiday: "bg-amber-100 text-amber-700",
-  Circular: "bg-violet-100 text-violet-700",
-  Results: "bg-rose-100 text-rose-700",
+  Holiday:   "bg-amber-100 text-amber-700",
+  Circular:  "bg-violet-100 text-violet-700",
+  Results:   "bg-rose-100 text-rose-700",
 };
 
 const Notices = () => {
@@ -46,7 +45,9 @@ const Notices = () => {
   const filtered = useMemo(() => {
     return notices.filter((n) => {
       const matchCategory = filter === "All" || n.category === filter;
-      const matchSearch = n.title.toLowerCase().includes(search.toLowerCase()) || n.desc.toLowerCase().includes(search.toLowerCase());
+      const matchSearch =
+        n.title.toLowerCase().includes(search.toLowerCase()) ||
+        n.desc.toLowerCase().includes(search.toLowerCase());
       return matchCategory && matchSearch;
     });
   }, [filter, search]);
@@ -56,97 +57,144 @@ const Notices = () => {
 
   return (
     <Layout>
-      <HeroSection title="Academic Notices" subtitle="Stay updated with the latest announcements, circulars, and schedules." />
 
-      <section className="section-padding">
-        <div className="container-custom max-w-4xl">
-          {/* Filters */}
-          <AnimatedSection>
-            <div className="sticky top-20 z-30 bg-background/80 backdrop-blur-xl rounded-2xl p-4 mb-8 border border-border">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <input
-                    type="text"
-                    placeholder="Search notices..."
-                    value={search}
-                    onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-                    className="w-full pl-10 pr-4 py-2.5 rounded-full bg-muted border-none text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
-                  />
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {categories.map((c) => (
-                    <button
-                      key={c}
-                      onClick={() => { setFilter(c); setPage(1); }}
-                      className={`px-4 py-2 rounded-full text-xs font-heading font-semibold transition-all ${
-                        filter === c ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:bg-accent"
-                      }`}
-                    >
-                      {c}
-                    </button>
-                  ))}
-                </div>
-              </div>
+      {/* HERO WITH BACKGROUND IMAGE */}
+      <div className="relative h-56 overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1400&q=85"
+          alt="School children"
+          className="w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-blue-900/65 flex flex-col justify-center px-8">
+          <p className="text-blue-200 text-xs uppercase tracking-widest mb-1">Gyan Jyoti School</p>
+          <h1 className="text-3xl font-extrabold text-white mb-1">Notices & Circulars</h1>
+          <p className="text-blue-100 text-sm">Stay updated with the latest school announcements</p>
+        </div>
+      </div>
+
+      {/* BREADCRUMB */}
+      <div className="bg-gray-100 border-b border-gray-200 px-6 py-2 text-xs text-gray-500">
+        <div className="max-w-4xl mx-auto">
+          <span>Home</span>
+          <span className="mx-2">›</span>
+          <span className="text-blue-700 font-semibold">Notices</span>
+        </div>
+      </div>
+
+      {/* CONTENT */}
+      <div className="max-w-4xl mx-auto px-6 py-8">
+
+        {/* Search + Filter */}
+        <AnimatedSection>
+          <div className="flex flex-col sm:flex-row gap-3 mb-5">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search notices..."
+                value={search}
+                onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+                className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 text-gray-700"
+              />
             </div>
-          </AnimatedSection>
-
-          {/* Notices */}
-          <div className="space-y-4">
-            {paginated.map((n, i) => (
-              <AnimatedSection key={n.id} delay={i * 0.05}>
-                <div className={`glass-card-hover rounded-2xl p-6 ${n.important ? "border-l-4 border-l-secondary" : ""}`}>
-                  <div className="flex flex-col sm:flex-row sm:items-start gap-4">
-                    <div className="flex flex-col items-center bg-primary/5 rounded-xl px-4 py-2 shrink-0">
-                      <span className="font-heading font-bold text-lg text-primary">{n.date.split(",")[0].split(" ")[1]}</span>
-                      <span className="text-xs text-muted-foreground">{n.date.split(",")[0].split(" ")[0]}</span>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1 flex-wrap">
-                        {n.important && <AlertTriangle className="w-4 h-4 text-secondary" />}
-                        <h3 className="font-heading font-bold text-foreground">{n.title}</h3>
-                      </div>
-                      <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold mb-2 ${categoryColors[n.category] || "bg-muted text-muted-foreground"}`}>
-                        {n.category}
-                      </span>
-                      <p className="text-muted-foreground text-sm">{n.desc}</p>
-                    </div>
-                    <button className="btn-pill bg-primary/5 text-primary hover:bg-primary/10 !px-4 !py-2 text-xs flex items-center gap-1.5 shrink-0">
-                      <Download className="w-3.5 h-3.5" /> PDF
-                    </button>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
-            {paginated.length === 0 && (
-              <div className="text-center py-12 text-muted-foreground">No notices found.</div>
-            )}
+            <div className="flex flex-wrap gap-2">
+              {categories.map((c) => (
+                <button
+                  key={c}
+                  onClick={() => { setFilter(c); setPage(1); }}
+                  className={`px-3 py-1.5 rounded text-xs font-semibold border transition-colors ${
+                    filter === c
+                      ? "bg-blue-800 text-white border-blue-800"
+                      : "bg-white text-gray-600 border-gray-300 hover:border-blue-400 hover:text-blue-700"
+                  }`}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
           </div>
+        </AnimatedSection>
 
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="flex justify-center items-center gap-4 mt-8">
-              <button
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
-                disabled={page === 1}
-                className="p-2 rounded-full hover:bg-muted disabled:opacity-30"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <span className="text-sm font-heading font-semibold text-foreground">
-                {page} / {totalPages}
-              </span>
-              <button
-                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                disabled={page === totalPages}
-                className="p-2 rounded-full hover:bg-muted disabled:opacity-30"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
+        {/* Notice List */}
+        <div className="border border-gray-200 rounded divide-y divide-gray-100">
+          {paginated.map((n, i) => (
+            <AnimatedSection key={n.id} delay={i * 0.04}>
+              <div className={`flex gap-4 px-5 py-4 hover:bg-gray-50 transition-colors ${n.important ? "border-l-4 border-l-red-500" : "border-l-4 border-l-transparent"}`}>
+
+                {/* Date */}
+                <div className="shrink-0 text-center w-10">
+                  <p className="text-lg font-extrabold text-blue-800 leading-none">
+                    {n.date.split(" ")[1].replace(",", "")}
+                  </p>
+                  <p className="text-xs text-gray-400 uppercase">{n.date.split(" ")[0]}</p>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                    {n.important && (
+                      <span className="flex items-center gap-1 text-red-600 text-xs font-semibold">
+                        <AlertTriangle className="w-3 h-3" /> Important
+                      </span>
+                    )}
+                    <span className={`text-xs font-semibold px-2 py-0.5 rounded ${categoryColors[n.category]}`}>
+                      {n.category}
+                    </span>
+                  </div>
+                  <p className="font-bold text-gray-800 text-sm mb-1">{n.title}</p>
+                  <p className="text-gray-500 text-xs leading-relaxed">{n.desc}</p>
+                </div>
+
+                {/* Download */}
+                <div className="shrink-0 flex items-center">
+                  <button className="flex items-center gap-1 text-xs text-blue-700 border border-blue-300 rounded px-2.5 py-1.5 hover:bg-blue-50 transition-colors">
+                    <Download className="w-3 h-3" /> PDF
+                  </button>
+                </div>
+
+              </div>
+            </AnimatedSection>
+          ))}
+
+          {paginated.length === 0 && (
+            <div className="text-center py-10 text-gray-400 text-sm">No notices found.</div>
           )}
         </div>
-      </section>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-2 mt-6">
+            <button
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page === 1}
+              className="flex items-center gap-1 px-3 py-1.5 border border-gray-300 rounded text-xs text-gray-600 hover:bg-gray-100 disabled:opacity-40"
+            >
+              <ChevronLeft className="w-4 h-4" /> Prev
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+              <button
+                key={p}
+                onClick={() => setPage(p)}
+                className={`w-8 h-8 rounded text-xs font-semibold border transition-colors ${
+                  page === p
+                    ? "bg-blue-800 text-white border-blue-800"
+                    : "border-gray-300 text-gray-600 hover:bg-gray-100"
+                }`}
+              >
+                {p}
+              </button>
+            ))}
+            <button
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages}
+              className="flex items-center gap-1 px-3 py-1.5 border border-gray-300 rounded text-xs text-gray-600 hover:bg-gray-100 disabled:opacity-40"
+            >
+              Next <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+
+      </div>
     </Layout>
   );
 };

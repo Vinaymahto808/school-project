@@ -14,20 +14,20 @@ const navItems = [
   {
     label: "About", to: "/about",
     dropdown: [
-      { label: "Our School",         desc: "History, vision & mission",  icon: School,  to: "/about#our-school" },
-      { label: "Principal's Message",desc: "A word from our principal",  icon: User,    to: "/about#principal" },
-      { label: "Achievements",       desc: "Awards & recognitions",      icon: Trophy,  to: "/about#achievements" },
-      { label: "Management",         desc: "Board & trustees",           icon: Users,   to: "/about#management" },
-      { label: "Campus Tour",        desc: "Explore our campus",         icon: MapPin,  to: "/about#campus" },
+      { label: "Overview",          desc: "About our school",          icon: School,  to: "/about#overview" },
+      { label: "Our Legacy",        desc: "History & journey",         icon: Trophy,  to: "/about#our-legacy" },
+      { label: "Principal Message", desc: "A word from our principal", icon: User,    to: "/about#principal" },
+      { label: "Affiliations",      desc: "Awards & recognitions",     icon: FileText,to: "/about#affiliations" },
+      { label: "Infrastructure",    desc: "Campus & facilities",       icon: MapPin,  to: "/about#infrastructure" },
     ]
   },
   {
     label: "Academics", to: "/academics",
     dropdown: [
-      { label: "Administration", desc: "Meet our leadership",       icon: Users,    to: "/academics#administration" },
+      { label: "Administration & Faculty", desc: "Meet our leadership",       icon: Users,    to: "/academics#administration" },
       { label: "Curriculum",     desc: "CBSE syllabus & framework", icon: BookOpen, to: "/academics#curriculum" },
       { label: "Examination",    desc: "Evaluation & schedule",     icon: FileText, to: "/academics#examination" },
-      { label: "Methodology",    desc: "Pedagogical approach",      icon: Activity, to: "/academics#methodology" },
+      { label: "Teaching Methodology",    desc: "Pedagogical approach",      icon: Activity, to: "/academics#methodology" },
       { label: "Calendar",       desc: "Events & dates",            icon: Calendar, to: "/academics#calendar" },
     ]
   },
@@ -266,7 +266,7 @@ const Navbar = () => {
                 boxShadow: `0 4px 16px ${accent}45`,
               }}
             >
-              Apply Now
+              Join Us
             </Link>
           </div>
 
